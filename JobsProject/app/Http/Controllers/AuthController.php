@@ -63,8 +63,8 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ];
-        // return response($response, 200);
-        return response([$response, "message" => "You have logged in successfully"]);
+        return response($response, 200);
+        // return response([$response, "message" => "You have logged in successfully"]);
     }
 }
 
