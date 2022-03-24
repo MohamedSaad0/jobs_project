@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Job;
 use App\Models\Apply;
-use Illuminate\Support\Facades\Auth;
 
-class JobApplicants extends Controller
+
+class FlutterJobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,9 @@ class JobApplicants extends Controller
     public function index()
     {
         //
-        return Apply::all();
+        $jobs = Job::all();
+        // return response()->json($jobs, 200);
+        return response()->json(["data" =>  $jobs, "Message" => "Success"]);
     }
 
     /**
@@ -27,6 +30,7 @@ class JobApplicants extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -37,21 +41,16 @@ class JobApplicants extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $jobId = Apply::where('job_id','=',$request->job_id)->get();
-        // if(Auth::id() === $jobId){
-        //     return "User Exists";
-        // }
-        // $user=Auth::user()->id->first();
-        // return $user;
-        // $apply = Apply::where('user_id',$user)->get();
-        // dd( $apply);
-        $job = new Apply();
-        $job->user_id=$request->user_id;
-        $job->job_id=$request->job_id;
-        $job->save();
-        return response("You have applied successfully");
-
+        //Create a job application
+        $app = new Apply();
+        $app->validate([
+            'user_id' => 'required',
+            'job_id' => 'required'
+        ]);
+        $app->user_id=$request->user_id;
+        $app->job_id=$request->job_id;
+        $app->save();
+        return response()->json(201);
     }
 
     /**
@@ -71,16 +70,9 @@ class JobApplicants extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         //
-        // if(Auth::check()){
-        //     $id=Auth::id();
-        //     return $id;
-        // }
-        // $user=Auth::user();
-        // return $user;
-
     }
 
     /**

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Apply;
-use Illuminate\Support\Facades\Auth;
 
-class JobApplicants extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class JobApplicants extends Controller
     public function index()
     {
         //
-        return Apply::all();
+        
     }
 
     /**
@@ -38,20 +36,6 @@ class JobApplicants extends Controller
     public function store(Request $request)
     {
         //
-        // $jobId = Apply::where('job_id','=',$request->job_id)->get();
-        // if(Auth::id() === $jobId){
-        //     return "User Exists";
-        // }
-        // $user=Auth::user()->id->first();
-        // return $user;
-        // $apply = Apply::where('user_id',$user)->get();
-        // dd( $apply);
-        $job = new Apply();
-        $job->user_id=$request->user_id;
-        $job->job_id=$request->job_id;
-        $job->save();
-        return response("You have applied successfully");
-
     }
 
     /**
@@ -71,16 +55,9 @@ class JobApplicants extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         //
-        // if(Auth::check()){
-        //     $id=Auth::id();
-        //     return $id;
-        // }
-        // $user=Auth::user();
-        // return $user;
-
     }
 
     /**
