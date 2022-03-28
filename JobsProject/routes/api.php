@@ -29,24 +29,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //////////////////////////////////////////////////////////////////////////
 //                               User                                   //
 //////////////////////////////////////////////////////////////////////////
+//register
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/job/create', [FlutterJobController::class, 'store']);
-
-//////////////////////////////////////////////////////////////////////////
-//                               Job                                    //
-//////////////////////////////////////////////////////////////////////////
-Route::post('/appliedJob', [JobApplicants::class, 'store']);
-Route::get('/appliedJobs', [JobApplicants::class, 'edit']);
-
-Route::get('/appliedJob', [JobApplicants::class, 'index']);
-Route::get('/jobs', [FlutterJobController::class, 'index']);
-
+//login
 Route::post('/login', [AuthController::class, 'login']);
 
 
+//////////////////////////////////////////////////////////////////////////
+//                            Protected Routes                          //
+//////////////////////////////////////////////////////////////////////////
+
 Route::group(['middleware' => ['auth:sanctum']],function() {
 
+    //list all jobs
+    Route::get('/jobs', [FlutterJobController::class, 'index']);
+    // Apply to a job
+    Route::post('/appliedJob', [JobApplicants::class, 'store']);
+    //logout
     Route::post('/logout', [AuthController::class, 'logout']);
-
 });
 
+
+
+
+// Route::post('/job/create', [FlutterJobController::class, 'store']);
