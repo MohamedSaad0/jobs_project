@@ -54,7 +54,7 @@ class AuthController extends Controller
         if(!$user || !Hash::check($fields['password'], $user->password) ) {
 
             return response ([
-                "Message" => "FALSE RUN",
+                "Message" => "FALSE RUN"
             ],  401);
         }
         $token = $user->createToken('myAppToken')->plainTextToken;

@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('jobs'   , function (Blueprint $table) {
             $table->id();
             $table->string('JobName');
             $table->string('Description');
-            $table->timestamps('Published_Date');
+            $table->timestamp('Published_Date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('job_id')->nullable();
             $table->foreign('job_id')->references('id')->on('jobs');
+            $table->integer('current_salary');
+            $table->integer('expected_salary');
+            $table->string('cv');
             $table->timestamps();
         });
     }
